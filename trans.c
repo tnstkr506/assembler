@@ -1,7 +1,5 @@
 #include "myas.h"
 
-char* reg[8] = { "%eax","%ecx","%edx","%ebx", "%esp","%ebp","%esi","%edi" };
-extern int RegEqual(char* arg);
 extern int is_valid(char *op, char* arg1, char* arg2);
 
 int instr_trans(char *op, char *args, char* mcode)
@@ -27,22 +25,16 @@ int instr_trans(char *op, char *args, char* mcode)
 		strcpy(opcode, "89");
 		break;
 	case RTM://reg(eax) to mem
-		if (strcmp(arg1, "%eax") == 0) {
-			strcpy(opcode, "a3");
-		}
-		else
-			strcpy(opcode, "error");
-	case MTR:
-		if (strcmp(arg2, "%eax") == 0) {
-			strcpy(opcode, "a1");
-		}
-		else if (RegEqual(arg2)) {
-			strcpy(opcode, "8b");
-		}
-		else
-			strcpy(opcode, "error");
-	case ITR:
-
+		strcpy(opcode, "a3");
+		break;
+	case MTRD://mem(dis) to reg
+		strcpy(opcode, "8b");
+		break;
+	case MTR_EAX://mem to eax
+		strcpy(opcode, "a1");
+		break;
+	case ITR://imd to reg
+		strcpy(opcode, "b8");
 		break;
 	default:
 		strcpy(opcode, "error");
