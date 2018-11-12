@@ -1,12 +1,22 @@
 #include "myas.h"
 
 extern int is_valid(char *op, char* arg1, char* arg2);
+extern char* reg[8];
+//"%eax","%ecx","%edx","%ebx", "%esp","%ebp","%esi","%edi"
+int RegType(char *arg) {
+	int i = 0;
+	for (i = 0; i < 8; i++) {
+		if (strcmp(arg, reg[i]) == 0)
+			return i;
+	}
+}
 
 int instr_trans(char *op, char *args, char* mcode)
 {
 	// check syntax 
 	char token[256];
 	int i = 0;
+	char hex = 8;
 	strcpy(token, args);
 	char *arg1 = strtok(token, ",");
 	char *arg2 = strtok(NULL, ",");
@@ -34,7 +44,13 @@ int instr_trans(char *op, char *args, char* mcode)
 		strcpy(opcode, "a1");
 		break;
 	case ITR://imd to reg
-		strcpy(opcode, "b8");
+		//"%eax","%ecx","%edx","%ebx", "%esp","%ebp","%esi","%edi"
+		hex += RegType(arg2);
+		if (hex >= 10)
+			hex = 'a' + (hex - 10);
+		else
+			hex = hex + '0';
+		opcode[0] = 'b'; opcode[1] = hex; opcode[2] = 0;
 		break;
 	default:
 		strcpy(opcode, "error");
