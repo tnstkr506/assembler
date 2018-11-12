@@ -5,7 +5,7 @@ char* memReg[8] = { "(%eax)","(%ecx)","(%edx)","(%ebx)", "(%esp)","(%ebp)","(%es
 int RegEqual(char *arg) {
 	int i = 0;
 	for (i = 0; i < 8; i++) {
-		if (strstr(arg, reg[i]) != NULL)
+		if (strcmp(arg, reg[i]) == 0)
 			return REG;
 	}
 	return 0;

@@ -16,7 +16,7 @@ int instr_trans(char *op, char *args, char* mcode)
 
 	if (!(RETVAL = is_valid(op, arg1, arg2))) {
 		printf("Error: %s %s is not valid\n", op, args);
-		strcpy(opcode, "error");
+		strcpy(mcode, "error");
 		return 0;
 	}
 	//{RTR = 1, MTR, MTR_WO, MTR_W, MTR_EAX, RTM, ITR};
