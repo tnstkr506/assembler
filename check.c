@@ -32,7 +32,7 @@ int is_valid(char *op, char *arg1, char * arg2)
 	int RResult2 = RegEqual(arg2);//is arg2 reg?
 	if (MResult1 == DIS) {//arg1 : mem(disp) 
 	//mem to reg (addressing w.o/w disp.)
-		if (RegEqual(arg2)) {//arg2 : reg
+		if (RResult2) {//arg2 : reg
 			return MTRD;
 		}
 		else
