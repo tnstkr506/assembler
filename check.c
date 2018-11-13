@@ -52,10 +52,19 @@ int is_valid(char *op, char *arg1, char * arg2)
 			if (MResult2) {//arg2 : mem
 				return RTM;
 			}
+			else if(RResult2) {//arg2 : reg
+			// reg to reg 
+				return RTR;
+			}
+			else
+				return 0;
 		}
 		else if (RResult2) {//arg2 : reg
 			// reg to reg 
 			return RTR;
+		}
+		else{
+			return 0;
 		}
 	}
 	else if (strstr(arg1, "$0x") != NULL) {//arg1 : imd
