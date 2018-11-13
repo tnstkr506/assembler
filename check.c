@@ -49,7 +49,7 @@ int is_valid(char *op, char *arg1, char * arg2)
 	else if (RResult1) {//arg1 : reg
 		if (strcmp(arg1, "%eax") == 0) {//arg1 : %eax
 			// reg(eax) to mem
-			if (MemEqual(arg2)) {//arg2 : mem
+			if (MResult2) {//arg2 : mem
 				return RTM;
 			}
 		}
